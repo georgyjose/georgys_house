@@ -41,11 +41,13 @@ No build step, no dependencies, no framework. Plain HTML, CSS and JavaScript.
 
 ### If the workflow fails with "Get Pages site failed … Not Found"
 
-That error means the repo's Pages source is **not** set to *GitHub Actions* — the
-workflow is trying to deploy to a Pages site that does not exist yet. Either switch the
-source to *GitHub Actions* in Settings, or let the workflow create it: the bundled
-workflow passes `enablement: true` to `actions/configure-pages`, which does exactly that
-on the first run.
+The repo's Pages source is not set to *GitHub Actions*, so the workflow is deploying to
+a site that does not exist. **Fix it in Settings → Pages → Source.** A workflow cannot
+turn Pages on for you: `enablement: true` on `actions/configure-pages` asks the API to
+create the site, and `GITHUB_TOKEN` has no admin scope, so it fails one line later with
+*"Create Pages site failed … Resource not accessible by integration"*. That option only
+works with a personal access token, which is not worth it for a one-time click. The
+bundled workflow therefore does **not** pass `enablement`.
 
 The *"Node 20 is being deprecated"* line in the same log is a separate, harmless warning
 from older action versions — it is not what failed the run. The bundled workflow pins
