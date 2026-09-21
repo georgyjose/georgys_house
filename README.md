@@ -28,11 +28,29 @@ No build step, no dependencies, no framework. Plain HTML, CSS and JavaScript.
    git push -u origin main
    ```
 
-2. **Settings → Pages → Build and deployment** → *Deploy from a branch*, `main`, `/ (root)`.
+2. **Settings → Pages → Build and deployment.** Pick one — they are mutually exclusive:
+
+   - **Deploy from a branch** → `main`, `/ (root)`. Simplest. The site has no build
+     step, so there is nothing for a workflow to do. If you choose this, **delete
+     `.github/workflows/deploy.yml`** — it will only fail.
+   - **GitHub Actions** → keep `.github/workflows/deploy.yml` and let it run.
 
 3. The site appears at `https://<your-username>.github.io/<repo>/`.
 
-`.nojekyll` is included so GitHub serves the folder as-is.
+`.nojekyll` is included so GitHub serves the folder as-is on the branch path.
+
+### If the workflow fails with "Get Pages site failed … Not Found"
+
+That error means the repo's Pages source is **not** set to *GitHub Actions* — the
+workflow is trying to deploy to a Pages site that does not exist yet. Either switch the
+source to *GitHub Actions* in Settings, or let the workflow create it: the bundled
+workflow passes `enablement: true` to `actions/configure-pages`, which does exactly that
+on the first run.
+
+The *"Node 20 is being deprecated"* line in the same log is a separate, harmless warning
+from older action versions — it is not what failed the run. The bundled workflow pins
+`configure-pages@v5`, `upload-pages-artifact@v5` and `deploy-pages@v5`, which run on
+Node 24.
 
 > On a free GitHub account, Pages only serves from a **public** repository — the plan
 > and its URL are publicly reachable. To keep it private, deploy the same folder to
@@ -48,8 +66,11 @@ so it works from disk. Or `python3 -m http.server 8000`.
 
 ```
 index.html
+.github/workflows/
+  deploy.yml           optional — only for the "GitHub Actions" Pages source
 assets/
   css/app.css          styling, light + dark
+  data/config.js       who may edit (see below)
   js/app.js            pan/zoom, layers, panel, search
   js/editor.js         the switch-arrangement editor
   data/plan-svg.js     the floor plan as one inline SVG
@@ -141,6 +162,31 @@ The ⓘ panel also carries the **GI box tally** — 76 boxes across 7 sizes — 
 module-box sheet, so it can be ordered without re-counting.
 
 ## Arranging the switches
+
+### Editing is off on the published site
+
+`assets/data/config.js` decides who may edit:
+
+```js
+window.HOUSE_CONFIG = { editing: 'local' };
+```
+
+| Value | Effect |
+|---|---|
+| `'local'` | **default** — editable only when served from your own machine |
+| `false` | never; the editor never loads |
+| `true` | always — do **not** commit this, it would enable editing on Pages |
+
+`'local'` means `file://`, `localhost`, `127.0.0.1`, `::1`, a `*.local` host, or a private
+LAN address. A `github.io` URL is none of those, so the published site is read-only: the
+pencil button, the progress bar and the export/import controls are removed from the page
+entirely, and `editor.js` returns before wiring anything up. Local-storage edits are not
+read either, so nothing of yours can leak into a published view.
+
+The published site still *shows* every arrangement committed in `layouts.js` — read-only
+means read-only, not empty.
+
+### Using the editor
 
 The CAD schedule says *what is on* a board. It doesn't say the order, or what each switch
 controls. The **pencil button** in the top bar turns on the editor for that.

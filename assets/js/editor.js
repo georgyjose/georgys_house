@@ -8,6 +8,20 @@
   var API = window.GR;                 // hooks published by app.js
   if (!D || !API) return;
 
+  /* ---------- may this page edit? ---------- */
+
+  function onOwnMachine() {
+    if (location.protocol === 'file:') return true;
+    var h = location.hostname;
+    return h === '' || h === 'localhost' || h === '127.0.0.1' || h === '::1' ||
+           h === '[::1]' || /\.local$/i.test(h) ||
+           /^10\./.test(h) || /^192\.168\./.test(h) ||
+           /^172\.(1[6-9]|2\d|3[01])\./.test(h);
+  }
+  var CFG = window.HOUSE_CONFIG || {};
+  var MAY_EDIT = CFG.editing === true ||
+                 (CFG.editing === 'local' && onOwnMachine());
+
   var KEY = 'gr-layouts-v1';
   var K = D.deviceKinds;
   var TYPES = ['light', 'fan', 'socket', 'socket-switch', 'heavy', 'data', 'blank'];
@@ -24,9 +38,26 @@
   var saved = {};
   Object.keys(base).forEach(function (k) { saved[k] = JSON.parse(JSON.stringify(base[k])); });
   try {
-    var local = JSON.parse(localStorage.getItem(KEY) || '{}');
-    Object.keys(local).forEach(function (k) { saved[k] = local[k]; });
+    if (MAY_EDIT) {
+      var local = JSON.parse(localStorage.getItem(KEY) || '{}');
+      Object.keys(local).forEach(function (k) { saved[k] = local[k]; });
+    }
   } catch (e) { /* storage blocked */ }
+  if (!MAY_EDIT) {
+    // published build: show what is committed in layouts.js, nothing editable
+    API.layoutFor = function (id) {
+      var v = base[id];
+      if (!v) return null;
+      return { title: v.title, note: v.note, faces: v.faces, modules: v.modules,
+               confidence: 'yours', why: '' };
+    };
+    var eb = document.getElementById('btn-edit');
+    if (eb && eb.parentNode) eb.parentNode.removeChild(eb);
+    var pe = document.getElementById('progress'); if (pe) pe.remove();
+    var fe = document.getElementById('side-foot'); if (fe) fe.remove();
+    return;
+  }
+
   function persist() {
     // only this browser's divergence from the committed file goes to storage
     var diff = {};
