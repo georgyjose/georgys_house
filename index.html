@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Georgy Residence — Switchboards</title>
+<meta name="description" content="Interactive electrical plan and switchboard layouts for Georgy Residence.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#9737;</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text">
+      <strong>Georgy Residence</strong>
+      <small>Switch board position · Rev 8</small>
+    </span>
+  </div>
+
+  <div class="layers" id="layers" role="group" aria-label="Plan layers"></div>
+
+  <div class="topbar-actions">
+    <button class="icon-btn" id="btn-index" aria-label="Toggle switchboard index" aria-expanded="true" title="Switchboard index">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-edit" aria-label="Arrange switches" aria-pressed="false" title="Arrange switches"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17v3z"/><path d="M14.5 6.5l3 3"/></svg></button>
+    <button class="icon-btn" id="btn-info" aria-label="About this drawing" title="About this drawing"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg></button>
+    <button class="icon-btn" id="btn-theme" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-sun"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-moon"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="shell">
+
+  <aside class="sidebar" id="sidebar" aria-label="Switchboard index">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" class="search-ico" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21"/></svg>
+      <input type="search" id="search" placeholder="Search board or room…" autocomplete="off" aria-label="Search switchboards">
+    </div>
+    <div class="legend-mini">
+      <span><i class="dot dot-done"></i>has schedule</span>
+      <span><i class="dot dot-lay"></i>+ Figma layout</span>
+    </div>
+    <div class="progress" id="progress" hidden></div>
+    <nav id="index-list" class="index-list"></nav>
+    <div class="side-foot" id="side-foot" hidden>
+      <button class="btn" id="btn-export">Export boards</button>
+      <button class="btn btn-ghost" id="btn-import">Import</button>
+      <input type="file" id="file-import" accept=".js,.json" hidden>
+    </div>
+  </aside>
+
+  <section class="stage" id="stage">
+    <div class="plan-host" id="plan-host" role="application" aria-label="Interactive floor plan"></div>
+
+    <div class="zoom-controls">
+      <button class="icon-btn" id="zoom-in" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="icon-btn" id="zoom-out" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+      <button class="icon-btn" id="zoom-reset" aria-label="Fit plan to screen" title="Fit to screen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    </div>
+
+    <p class="hint" id="hint">Tap a <b>marker</b> for that board&rsquo;s schedule</p>
+  </section>
+
+</main>
+
+<div class="panel-scrim" id="scrim" hidden></div>
+
+<aside class="panel" id="panel" hidden aria-labelledby="panel-title" role="dialog" aria-modal="false">
+  <button class="panel-close icon-btn" id="panel-close" aria-label="Close">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="panel-body" id="panel-body"></div>
+</aside>
+
+<script src="assets/data/plan-svg.js"></script>
+<script src="assets/data/boards.js"></script>
+<script src="assets/data/layouts.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/editor.js"></script>
+</body>
+</html>
