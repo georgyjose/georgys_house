@@ -19,7 +19,7 @@
   var lastK = null;
   // marker sizes are authored for a 928-unit-wide plan; scale to this drawing
   var SC = base[2] / 928;
-  var R_RING = 5 * SC, R_CORE = 1.9 * SC, R_HIT = 11 * SC, LAB_OFF = 8.5 * SC, LAB_FS = 7.6 * SC;
+  var R_RING = 5 * SC, R_CORE = 1.9 * SC, R_HIT = 11 * SC, LAB_OFF = 10 * SC, LAB_FS = 10 * SC;
 
   function applyView() {
     svg.setAttribute('viewBox', view.x + ' ' + view.y + ' ' + view.w + ' ' + view.h);
@@ -414,7 +414,7 @@
         '<span><b>' + (L.confidence === 'strong' ? 'Confident match' : 'Likely match') + '.</b> ' +
         esc(L.why) + '</span></div>';
     }
-    return h + plateHtml(L.modules, L.faces, 'as drawn');
+    return h + plateHtml(L.modules, L.faces, '· as seen facing the wall');
   }
 
   function open(id, fly) {

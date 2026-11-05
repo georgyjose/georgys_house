@@ -266,15 +266,15 @@ body.off-eqnote #plan-svg .l-eqnote{display:none}
 #markers .mk-core{fill:var(--accent)}
 #markers .mk.todo .mk-core{fill:var(--ink-3);opacity:.5}
 #markers .mk-label{
-  font-weight:600;
+  font-weight:800;
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
   fill:var(--accent);paint-order:stroke;
   stroke:var(--plan-bg);
-  stroke-width:calc(2.4px * var(--mk-k,1));
+  stroke-width:calc(3.6px * var(--mk-k,1));
   stroke-linejoin:round;
   pointer-events:none;
 }
-#markers .mk.todo .mk-label{fill:var(--ink-3)}
+#markers .mk.todo .mk-label{fill:var(--ink-2)}
 #markers .mk:hover .mk-ring,
 #markers .mk.active .mk-ring{stroke-width:3.2}
 #markers .mk-pulse{fill:none;stroke:var(--accent);stroke-width:1.4;vector-effect:non-scaling-stroke;opacity:0}
