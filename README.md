@@ -158,8 +158,8 @@ The one exception is `S3C` — the switch-board sheet carries *two* tables label
 and 9M), while the module-box table says 9M. The app flags it on that board and in the ⓘ
 panel. Worth resolving with Sourorja.
 
-`S3A` is marked on the plan but has no schedule table. (`S20C` had none either; it
-is now the dishwasher board — see below.)
+`S3A` and `S20C` are marked on the plan with no schedule table. Both now have one —
+see the list of changes below.
 
 The ⓘ panel also carries the **GI box tally** — 76 boxes across 7 sizes — straight from the
 module-box sheet, so it can be ordered without re-counting.
@@ -209,7 +209,14 @@ its device list with others, the editor says so and offers **Copy this arrangeme
 boards**. Boards whose signature already matches one of the Figma layouts come pre-filled,
 flagged with where the names came from.
 
-Progress shows in the sidebar; an arranged board gets a green tag.
+Progress shows in the sidebar; an arranged board gets a green tag, on the published
+site too.
+
+**Needs revisit.** Tick *Needs revisit* at the top of the editor to flag a board you
+want to come back to. It turns amber in the sidebar and on the plan, its panel says
+"Marked to revisit", and the progress bar counts it. The flag is saved as
+`"revisit": true` in `layouts.js`, so it is exported and shows on the published site
+until you untick it.
 
 ### Saving your work
 
@@ -258,6 +265,12 @@ layout agree:
 - **S34A** — 3 one-way switches, not 2, to add the roof light; 6M, not 4M.
 - **S20C** — no schedule on the drawing; given a 15/30A socket + one-way for the
   dishwasher, like S20B beside it. The module-box table already counts it as 3M.
+- **S4** — 3 one-way + 1 two-way switch, no sockets (the drawing had 2 one-way +
+  2 sockets). Still 4M.
+- **S1A, S17A–S17D** — wall fans are wired directly to the fan; no socket or
+  switchboard at the point. Each is switched from another board.
+- **S3A** — no schedule on the drawing; given a 5/15A socket + one-way under the day
+  bed, like S3B. The module-box table already counts it as 3M.
 - GI box tally adjusted for the two plate changes.
 
 S11's second two-way switch is the corridor light, so it can be switched off from the

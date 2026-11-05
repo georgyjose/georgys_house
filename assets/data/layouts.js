@@ -276,6 +276,54 @@ window.HOUSE_LAYOUTS = {
    }
   ]
  },
+ "S17A": {
+  "title": "Wall fan point",
+  "note": "Wired directly to the fan, no switchboard",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Wall fan (direct wiring)",
+    "type": "blank",
+    "w": 2
+   }
+  ]
+ },
+ "S17B": {
+  "title": "Wall fan point",
+  "note": "Wired directly to the fan, no switchboard. Switched from S4.",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Wall fan (direct wiring)",
+    "type": "blank",
+    "w": 2
+   }
+  ]
+ },
+ "S17C": {
+  "title": "Wall fan point",
+  "note": "Wired directly to the fan, no switchboard",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Wall fan (direct wiring)",
+    "type": "blank",
+    "w": 2
+   }
+  ]
+ },
+ "S17D": {
+  "title": "Wall fan point",
+  "note": "Wired directly to the fan, no switchboard. Switched from S3H.",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Wall fan (direct wiring)",
+    "type": "blank",
+    "w": 2
+   }
+  ]
+ },
  "S18": {
   "title": "Kitchen lights",
   "note": "",
@@ -343,13 +391,13 @@ window.HOUSE_LAYOUTS = {
   ]
  },
  "S1A": {
-  "title": "Wall fan",
-  "note": "",
+  "title": "Wall fan point",
+  "note": "Wired directly to the fan, no switchboard",
   "faces": {},
   "modules": [
    {
-    "label": "Wall fan socket",
-    "type": "socket",
+    "label": "Wall fan (direct wiring)",
+    "type": "blank",
     "w": 2
    }
   ]
@@ -802,6 +850,55 @@ window.HOUSE_LAYOUTS = {
    }
   ]
  },
+ "S29": {
+  "title": "Wash counter",
+  "note": "",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Mirror light",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "Ceiling lights above wash counter",
+    "type": "light",
+    "w": 1
+   }
+  ]
+ },
+ "S30": {
+  "title": "Courtyard side",
+  "note": "",
+  "faces": {},
+  "modules": [
+   {
+    "label": "High ceiling lights (3, 2 way)",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "Ceiling lights near courtyard",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "L3 lights in courtyard",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "Ironing table socket",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for ironing table",
+    "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
  "S31": {
   "title": "Main Switch Board",
   "note": "Nearest the room door",
@@ -999,8 +1096,25 @@ window.HOUSE_LAYOUTS = {
    }
   ]
  },
+ "S3A": {
+  "title": "Under day bed",
+  "note": "",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Plug Point",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for Plug Point",
+    "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
  "S3B": {
-  "title": "Switch and socket",
+  "title": "Under day bed",
   "note": "",
   "faces": {},
   "modules": [
@@ -1017,18 +1131,154 @@ window.HOUSE_LAYOUTS = {
   ]
  },
  "S3C": {
-  "title": "Switch and socket",
-  "note": "",
+  "title": "TV wall",
+  "note": "TV, PS5, soundbar, audio system",
   "faces": {},
   "modules": [
    {
-    "label": "Plug Point",
+    "label": "AV socket 1",
     "type": "socket",
     "w": 2
    },
    {
-    "label": "Switch for Plug Point",
+    "label": "Switch for AV socket 1",
     "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
+ "S3D": {
+  "title": "TV wall",
+  "note": "TV, PS5, soundbar, audio system",
+  "faces": {},
+  "modules": [
+   {
+    "label": "AV socket 1",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for AV socket 1",
+    "type": "socket-switch",
+    "w": 1
+   },
+   {
+    "label": "AV socket 2",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for AV socket 2",
+    "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
+ "S3E": {
+  "title": "TV wall",
+  "note": "TV, PS5, soundbar, audio system",
+  "faces": {},
+  "modules": [
+   {
+    "label": "AV socket 1",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for AV socket 1",
+    "type": "socket-switch",
+    "w": 1
+   },
+   {
+    "label": "AV socket 2",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for AV socket 2",
+    "type": "socket-switch",
+    "w": 1
+   },
+   {
+    "label": "AV socket 3",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for AV socket 3",
+    "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
+ "S3F": {
+  "title": "Network rack",
+  "note": "",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Network rack socket 1",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for network rack socket 1",
+    "type": "socket-switch",
+    "w": 1
+   },
+   {
+    "label": "Network rack socket 2",
+    "type": "socket",
+    "w": 2
+   },
+   {
+    "label": "Switch for network rack socket 2",
+    "type": "socket-switch",
+    "w": 1
+   }
+  ]
+ },
+ "S3H": {
+  "title": "Wall fan and tube",
+  "note": "",
+  "faces": {},
+  "modules": [
+   {
+    "label": "Wall fan (S17D)",
+    "type": "fan",
+    "w": 1
+   },
+   {
+    "label": "Tube",
+    "type": "light",
+    "w": 1
+   }
+  ]
+ },
+ "S4": {
+  "title": "Corridor and high ceiling",
+  "note": "",
+  "faces": {},
+  "revisit": true,
+  "modules": [
+   {
+    "label": "Corridor ceiling lights (to master bedroom)",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "Wall fan (S17B)",
+    "type": "fan",
+    "w": 1
+   },
+   {
+    "label": "L3 light below wall fan",
+    "type": "light",
+    "w": 1
+   },
+   {
+    "label": "High ceiling roof lights (4, 2 way)",
+    "type": "light",
     "w": 1
    }
   ]

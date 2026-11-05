@@ -259,13 +259,12 @@ window.HOUSE_DATA = {
    "x": 913.8,
    "y": 114.3,
    "roomGuess": true,
-   "plate": 2,
    "devices": [
     {
-     "t": "5/15A",
+     "t": "WALL FAN",
      "q": "1",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "label": "Wall fan point, wired directly to the fan",
+     "kind": "fan"
     }
    ]
   },
@@ -403,7 +402,26 @@ window.HOUSE_DATA = {
    "room": "Dining / Family Living",
    "x": 1077.2,
    "y": 491.5,
-   "plateTable": 3
+   "plateTable": 3,
+   "plate": 3,
+   "devices": [
+    {
+     "t": "ONE WAY",
+     "q": "1",
+     "label": "6A one-way switch",
+     "kind": "light"
+    },
+    {
+     "t": "5/15",
+     "q": "1",
+     "label": "5/15A socket",
+     "kind": "socket"
+    }
+   ],
+   "hfl": {
+    "cm": "30",
+    "approx": true
+   }
   },
   {
    "id": "S3B",
@@ -592,15 +610,15 @@ window.HOUSE_DATA = {
    "devices": [
     {
      "t": "ONE WAY",
-     "q": "2",
+     "q": "3",
      "label": "6A one-way switch",
      "kind": "light"
     },
     {
-     "t": "5/15A",
-     "q": "2",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "t": "TWO WAY",
+     "q": "1",
+     "label": "6A two-way switch",
+     "kind": "light"
     }
    ],
    "hfl": {
@@ -1259,14 +1277,12 @@ window.HOUSE_DATA = {
    "room": "Dining / Family Living",
    "x": 1605.1,
    "y": 1039.7,
-   "plate": 2,
-   "plateTable": 2,
    "devices": [
     {
-     "t": "5/15A",
+     "t": "WALL FAN",
      "q": "1",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "label": "Wall fan point, wired directly to the fan",
+     "kind": "fan"
     }
    ],
    "hfl": {
@@ -1279,14 +1295,12 @@ window.HOUSE_DATA = {
    "room": "Dining / Family Living",
    "x": 1061.3,
    "y": 1039.7,
-   "plate": 2,
-   "plateTable": 2,
    "devices": [
     {
-     "t": "5/15A",
+     "t": "WALL FAN",
      "q": "1",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "label": "Wall fan point, wired directly to the fan",
+     "kind": "fan"
     }
    ],
    "hfl": {
@@ -1299,14 +1313,12 @@ window.HOUSE_DATA = {
    "room": "Dining / Family Living",
    "x": 1042.3,
    "y": 505.3,
-   "plate": 2,
-   "plateTable": 2,
    "devices": [
     {
-     "t": "5/15A",
+     "t": "WALL FAN",
      "q": "1",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "label": "Wall fan point, wired directly to the fan",
+     "kind": "fan"
     }
    ],
    "hfl": {
@@ -1319,14 +1331,12 @@ window.HOUSE_DATA = {
    "room": "Dining / Family Living",
    "x": 1605.1,
    "y": 505.3,
-   "plate": 2,
-   "plateTable": 2,
    "devices": [
     {
-     "t": "5/15A",
+     "t": "WALL FAN",
      "q": "1",
-     "label": "5/15A socket",
-     "kind": "socket"
+     "label": "Wall fan point, wired directly to the fan",
+     "kind": "fan"
     }
    ],
    "hfl": {
