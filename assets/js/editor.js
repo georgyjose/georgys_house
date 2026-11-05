@@ -49,8 +49,12 @@
       var v = base[id];
       if (!v) return null;
       return { title: v.title, note: v.note, faces: v.faces, modules: v.modules,
-               confidence: 'yours', why: '' };
+               revisit: !!v.revisit, confidence: 'yours', why: '' };
     };
+    // app.js drew the index (and any deep-linked board) before these layouts existed
+    API.refreshIndex();
+    var cur0 = API.currentId();
+    if (cur0) API.open(cur0);
     var eb = document.getElementById('btn-edit');
     if (eb && eb.parentNode) eb.parentNode.removeChild(eb);
     var pe = document.getElementById('progress'); if (pe) pe.remove();
@@ -155,11 +159,7 @@
              faces: JSON.parse(JSON.stringify((src && src.faces) || {})),
              modules: seed(b), draft: true };
   }
-  function isArranged(id) {
-    var s = saved[id];
-    return !!(s && s.modules && s.modules.length &&
-              s.modules.every(function (m) { return (m.label || '').trim() || m.type === 'blank'; }));
-  }
+  function isArranged(id) { return API.isArranged(id); }
 
   /* ---------- progress ---------- */
 
@@ -169,9 +169,11 @@
     if (!progEl) return;
     var total = D.boards.filter(function (b) { return b.devices; }).length;
     var done = D.boards.filter(function (b) { return isArranged(b.id); }).length;
+    var rv = D.boards.filter(function (b) { return API.needsRevisit(b.id); }).length;
     progEl.innerHTML = '<div class="prog-bar"><i style="width:' +
       (total ? Math.round(done / total * 100) : 0) + '%"></i></div>' +
-      '<span>' + done + ' of ' + total + ' boards arranged</span>';
+      '<span>' + done + ' of ' + total + ' boards arranged' +
+      (rv ? ' · ' + rv + ' to revisit' : '') + '</span>';
     API.refreshIndex();
   }
 
@@ -211,6 +213,8 @@
     var lent = L.modules.length && L.modules[0].from;
 
     var h = '<div class="ed">';
+    h += '<label class="ed-revisit"><input id="ed-revisit" type="checkbox"' +
+         (L.revisit ? ' checked' : '') + '> Needs revisit</label>';
     h += '<label class="ed-f"><span>Board name</span>' +
          '<input id="ed-title" type="text" value="' + esc(L.title) + '" placeholder="e.g. Bedside switch"></label>';
     h += '<label class="ed-f"><span>Note</span>' +
@@ -281,6 +285,7 @@
     function save() {
       L.draft = false;
       saved[b.id] = { title: L.title, note: L.note, faces: L.faces, modules: L.modules };
+      if (L.revisit) saved[b.id].revisit = true;
       persist();
     }
     function redraw() { save(); API.open(b.id); }
@@ -290,6 +295,8 @@
       if (!el) return;
       el.addEventListener('input', function () { set(el.value); save(); });
     }
+    var rvBox = document.getElementById('ed-revisit');
+    if (rvBox) rvBox.addEventListener('change', function () { L.revisit = rvBox.checked; save(); });
     field('ed-title', function (v) { L.title = v; });
     field('ed-note', function (v) { L.note = v; });
     field('ed-fl', function (v) { L.faces = L.faces || {}; L.faces.left = v; });
@@ -403,6 +410,7 @@
           return o;
         })
       };
+      if (s.revisit) obj[id].revisit = true;
     });
     return '// Switch arrangements for Georgy Residence.\n' +
            '// Edited in the app; overrides `layout` in boards.js.\n' +
@@ -457,8 +465,11 @@
     var s = saved[id];
     if (!s) return null;
     return { title: s.title, note: s.note, faces: s.faces, modules: s.modules,
+             revisit: !!s.revisit,
              confidence: 'yours', why: 'Your arrangement, saved in this browser.' };
   };
 
   paintProgress();
+  var cur1 = API.currentId();
+  if (cur1) API.open(cur1);
 })();

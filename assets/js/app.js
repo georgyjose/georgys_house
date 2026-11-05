@@ -287,6 +287,27 @@
     return bits.concat(other).join(' \u00b7 ');
   }
 
+  // works in every mode: layoutFor is published by editor.js, edit or read-only
+  function isArranged(id) {
+    var L = GR.layoutFor ? GR.layoutFor(id) : null;
+    return !!(L && L.modules && L.modules.length &&
+              L.modules.every(function (m) { return (m.label || '').trim() || m.type === 'blank'; }));
+  }
+  function needsRevisit(id) {
+    var L = GR.layoutFor ? GR.layoutFor(id) : null;
+    return !!(L && L.revisit);
+  }
+  GR.isArranged = isArranged;
+  GR.needsRevisit = needsRevisit;
+
+  function paintMarkers() {
+    Object.keys(markerEls).forEach(function (id) {
+      var r = needsRevisit(id);
+      markerEls[id].classList.toggle('revisit', r);
+      markerEls[id].classList.toggle('arranged', !r && isArranged(id));
+    });
+  }
+
   function renderIndex(q) {
     q = (q || '').trim().toLowerCase();
     listEl.innerHTML = '';
@@ -318,7 +339,10 @@
         btn.querySelector('.tag').textContent = b.id;
         var mine2 = GR.layoutFor ? GR.layoutFor(b.id) : null;
         var nm = (mine2 && mine2.title) || (b.layout && b.layout.title);
-        if (GR.editor && GR.editor.isArranged(b.id)) btn.classList.add('arranged');
+        if (needsRevisit(b.id)) {
+          btn.classList.add('revisit');
+          btn.title = 'Marked to revisit';
+        } else if (isArranged(b.id)) btn.classList.add('arranged');
         btn.querySelector('.name').textContent = nm || (done ? summarise(b) : 'No schedule on drawing');
         btn.querySelector('.meta').textContent = b.plate ? b.plate + 'M' : '';
         btn.onclick = function () { open(b.id, true); };
@@ -446,6 +470,11 @@
     if (ed && ed.active()) {
       h += ed.html(b);
     } else if (mine) {
+      if (mine.revisit) {
+        h += '<div class="flag revisit"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.01"/>' +
+             '<circle cx="12" cy="12" r="9"/></svg><span><b>Marked to revisit.</b> ' +
+             'This arrangement is not final yet.</span></div>';
+      }
       h += layoutHtml(mine);
     } else if (b.layout) {
       h += layoutHtml(b.layout);
@@ -582,7 +611,7 @@
   GR.byId = function (id) { return byId[id]; };
   GR.open = open;
   GR.currentId = function () { return current; };
-  GR.refreshIndex = function () { renderIndex($('search').value); };
+  GR.refreshIndex = function () { renderIndex($('search').value); paintMarkers(); };
   GR.plateHtml = plateHtml;
   GR.previewOnly = function () { /* full redraw happens on save */ };
 
