@@ -20,20 +20,7 @@ window.HOUSE_DATA = {
    "The AC (4 numbers) and fan sockets (5 numbers) are 2 module each.",
    "Switch board S2BB is a floor mounted box."
   ],
-  "unmatchedLayouts": [
-   {
-    "title": "Above Table",
-    "why": "Rev 8 has no master-bedroom board matching this. Closest are S12A (3 one-way + 16A socket at 90cm) and S14 (3 one-way at 135cm)."
-   },
-   {
-    "title": "Outside of Bathroom",
-    "why": "Rev 8 shows only one board for the master bathroom (S13). The outside/inside pair does not appear."
-   },
-   {
-    "title": "Inside of Bathroom",
-    "why": "Same \u2014 S13 (3 one-way + socket at 150cm) is the only master bathroom board in Rev 8."
-   }
-  ],
+  "unmatchedLayouts": [],
   "sheets": [
    [
     "Switch Board Position",
@@ -62,15 +49,15 @@ window.HOUSE_DATA = {
    ],
    [
     4,
-    6
+    5
    ],
    [
     6,
-    16
+    18
    ],
    [
     8,
-    11
+    10
    ],
    [
     9,
@@ -913,9 +900,9 @@ window.HOUSE_DATA = {
    "plateTable": 2,
    "devices": [
     {
-     "t": "CAT 6",
+     "t": "CAT 6A",
      "q": "1",
-     "label": "CAT 6 data point",
+     "label": "CAT 6A data point",
      "kind": "data"
     }
    ],
@@ -960,7 +947,7 @@ window.HOUSE_DATA = {
    "devices": [
     {
      "t": "ONE WAY",
-     "q": "3",
+     "q": "2",
      "label": "6A one-way switch",
      "kind": "light"
     },
@@ -1510,7 +1497,26 @@ window.HOUSE_DATA = {
    "room": "Kitchen",
    "x": 1907.0,
    "y": 1732.9,
-   "plateTable": 3
+   "plateTable": 3,
+   "plate": 3,
+   "devices": [
+    {
+     "t": "ONE WAY",
+     "q": "1",
+     "label": "6A one-way switch",
+     "kind": "light"
+    },
+    {
+     "t": "15/30A",
+     "q": "1",
+     "label": "15/30A power socket",
+     "kind": "heavy"
+    }
+   ],
+   "hfl": {
+    "cm": "45",
+    "approx": true
+   }
   },
   {
    "id": "S21",
@@ -1961,8 +1967,8 @@ window.HOUSE_DATA = {
    "room": "Bedroom 3",
    "x": 1819.1,
    "y": 468.3,
-   "plate": 8,
-   "plateTable": 8,
+   "plate": 6,
+   "plateTable": 6,
    "devices": [
     {
      "t": "ONE WAY",
@@ -1981,12 +1987,6 @@ window.HOUSE_DATA = {
      "q": "1",
      "label": "AC point",
      "kind": "heavy"
-    },
-    {
-     "t": "FAN KNOB",
-     "q": "1",
-     "label": "Fan regulator",
-     "kind": "fan"
     }
    ],
    "hfl": {
@@ -2115,12 +2115,12 @@ window.HOUSE_DATA = {
    "room": "Bedroom 3",
    "x": 2210.7,
    "y": 115.0,
-   "plate": 4,
-   "plateTable": 4,
+   "plate": 6,
+   "plateTable": 6,
    "devices": [
     {
      "t": "ONE WAY",
-     "q": "2",
+     "q": "3",
      "label": "6A one-way switch",
      "kind": "light"
     },

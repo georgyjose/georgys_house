@@ -158,7 +158,8 @@ The one exception is `S3C` — the switch-board sheet carries *two* tables label
 and 9M), while the module-box table says 9M. The app flags it on that board and in the ⓘ
 panel. Worth resolving with Sourorja.
 
-`S3A` and `S20C` are marked on the plan but have no schedule table.
+`S3A` is marked on the plan but has no schedule table. (`S20C` had none either; it
+is now the dishwasher board — see below.)
 
 The ⓘ panel also carries the **GI box tally** — 76 boxes across 7 sizes — straight from the
 module-box sheet, so it can be ordered without re-counting.
@@ -227,21 +228,40 @@ arrangements. **Import** reads an exported file back in.
 
 The CAD schedule says *what is on* a board. It doesn't say the left-to-right order, or
 what each switch controls. That comes from the *Georgy's House | Switch Boards* Figma
-board, and is attached to four boards where the device lists agree:
+board. All seven sketches map to Rev 8 boards, and every bedroom repeats them, so they
+are committed in `layouts.js` for all four bedrooms and their bathrooms:
 
-| Board | Layout | Why it matches |
-|---|---|---|
-| S11 | Main Switch Board | 2 one-way + 2 two-way + AC at 135cm |
-| S15 | Bedside switch (away from door) | exact device match; HFL 60cm is bedside height |
-| S16 | Bedside switch (near door) | only board in the room with a MASTER switch, at 60cm |
-| S14A | Dressing Table | 3 one-way + socket at 125cm in the Dress area |
+| Layout | Master | Bedroom 2 | Bedroom 4 | Bedroom 3 |
+|---|---|---|---|---|
+| Main Switch Board (by door) | S11 | S5 | S26 | S31 |
+| Bedside switch (away from door) | S15 | S8 | S25 | S33 |
+| Bedside switch (near door) | S16 | S7 | S24 | S32 |
+| Dressing Table | S14A | S9A | S27A | S34A |
+| Above Table | S12A | S6 | S26A | — |
+| Outside of Bathroom | S14 | S9 | S27 | S34 |
+| Inside of Bathroom | S13 | S10 | S28 | S35 |
 
-Three Figma layouts have **no Rev 8 equivalent** — *Above Table*, *Outside of Bathroom*,
-*Inside of Bathroom*. Rev 8 shows a single master-bathroom board (S13) rather than an
-outside/inside pair. Either the Figma sketches predate Rev 8, or the drawing is missing
-something. The ⓘ button in the app lists this.
+The outside/inside bathroom boards sit on either side of the same wall (28–48 plan units
+apart). The fan regulator always goes on the bedside board away from the door.
 
-To attach a layout to another board, move the `layout` block onto that board's entry.
+Every layout is stored **as seen standing in the room, facing the board**. The Figma
+sketches fix what sits next to what (door, bed, table); where a board faces the other way
+on the plan, its strip is mirrored. The site is the final arrangement for the electrician,
+so it carries no review notes.
+
+Changes from the Rev 8 drawing, already applied to `boards.js` so the schedule and the
+layout agree:
+
+- **S13** — 2 one-way switches, not 3.
+- **S31** — no fan regulator (it is on S33, as in every bedroom); 6M, not 8M. Its spare
+  one-way is the wardrobe light, since Bedroom 3 has no above-table board.
+- **S34A** — 3 one-way switches, not 2, to add the roof light; 6M, not 4M.
+- **S20C** — no schedule on the drawing; given a 15/30A socket + one-way for the
+  dishwasher, like S20B beside it. The module-box table already counts it as 3M.
+- GI box tally adjusted for the two plate changes.
+
+S11's second two-way switch is the corridor light, so it can be switched off from the
+master bedroom.
 
 ### Regenerating from a newer DWG
 
